@@ -9,6 +9,7 @@
     "dev:server": "node server/index.js",
     "start:server": "node server/index.js",
     "bult": "vite build",
+    "built": "vite build",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"
