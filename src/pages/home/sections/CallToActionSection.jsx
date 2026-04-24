@@ -86,6 +86,12 @@ function CallToActionSection({ siteConfig }) {
 			})
 
 			if (!response.ok) {
+				if (response.status === 404) {
+					setHealthState('offline')
+					setHealthMessage('Health endpoint not found. Deploy API or set VITE_HEALTH_API_URL.')
+					return
+				}
+
 				throw new Error('Health endpoint unavailable')
 			}
 
@@ -146,6 +152,10 @@ function CallToActionSection({ siteConfig }) {
 			})
 
 			if (!response.ok) {
+				if (response.status === 404) {
+					throw new Error('Contact API endpoint not found. Deploy API or set VITE_CONTACT_API_URL.')
+				}
+
 				if (response.status === 502) {
 					throw new Error('Contact service is not reachable. In development, run npm run dev so both client and API are started.')
 				}

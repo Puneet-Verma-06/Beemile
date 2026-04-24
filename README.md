@@ -33,6 +33,13 @@ If you only run the frontend, form submit can return 502 because `/api` proxy ha
 
 This repo now includes serverless API handlers in [api/contact.js](api/contact.js) and [api/health.js](api/health.js), so platforms like Vercel can serve `/api/*` in production.
 
+If you see `404` for `/api/health` or `/api/contact` after deployment, your frontend is deployed but API routes are not being served on that host.
+
+- Vercel: deploy the project root (not only `dist`) so the `api/` folder is included.
+- Static-only hosts: deploy `server/index.js` as a separate backend and set:
+	- `VITE_CONTACT_API_URL=https://<your-backend>/api/contact`
+	- `VITE_HEALTH_API_URL=https://<your-backend>/api/health`
+
 Set production environment variables on your host:
 
 - `SMTP_USER`
